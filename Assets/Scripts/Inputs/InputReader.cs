@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using static PlayerInputsActions;
+using static PlayerInputActions;
 
 namespace Platformer
 {
@@ -15,7 +15,7 @@ namespace Platformer
         public event UnityAction EnableMouseControlCamera = delegate { };
         public event UnityAction DisableMouseControlCamera = delegate { };
 
-        PlayerInputsActions inputActions;
+        PlayerInputActions inputActions;
 
         public Vector3 Direction => inputActions.Platformer.Move.ReadValue<Vector2>();
 
@@ -23,7 +23,7 @@ namespace Platformer
         {
             if (inputActions == null)
             {
-                inputActions = new PlayerInputsActions();
+                inputActions = new PlayerInputActions();
                 inputActions.Platformer.SetCallbacks(this);
                 inputActions.Dungeon.SetCallbacks(this);
             }
