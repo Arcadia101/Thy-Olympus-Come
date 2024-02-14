@@ -25,6 +25,9 @@ namespace Platformer
         float currentSpeed;
         float velocity;
 
+        //Animator parameters
+        static readonly int Speed = Animator.StringToHash("Speed");
+
         void Awake()
         {
             mainCam = Camera.main.transform;
@@ -33,10 +36,20 @@ namespace Platformer
             freeLookCam.OnTargetObjectWarped(transform, transform.position - freeLookCam.transform.position -  Vector3.forward);
         }
 
+        void Start()
+        {
+            input.EnablePlayerActions();
+        }
+
         void Update()
         {
             HandleMovement();
-            //UpdateAnimator();
+            UpdateAnimator();
+        }
+
+        private void UpdateAnimator()
+        {
+            animator.SetFloat(Speed,currentSpeed);
         }
 
         private void HandleMovement()

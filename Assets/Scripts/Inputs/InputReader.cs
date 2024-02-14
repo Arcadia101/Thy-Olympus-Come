@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using static PlayerInputsActions;
 
 namespace Platformer
 {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Platformer/InputReader")]
-    public class InputReader : ScriptableObject, PlayerInputsActions.IPlayerActions
+    public class InputReader : ScriptableObject, IPlayerActions
     {
         public event UnityAction<Vector2> Move = delegate { };
         public event UnityAction<Vector2> Aim = delegate { };
+        public event UnityAction<Vector2, bool> Look = delegate { };
+        public event UnityAction EnableMouseControlCamera = delegate { };
+        public event UnityAction DisableMouseControlCamera = delegate { };
 
         PlayerInputsActions inputActions;
 
@@ -21,6 +25,11 @@ namespace Platformer
                 inputActions = new PlayerInputsActions();
                 inputActions.Player.SetCallbacks(this);
             }
+            
+        }
+
+        public void EnablePlayerActions()
+        {
             inputActions.Enable();
         }
 
