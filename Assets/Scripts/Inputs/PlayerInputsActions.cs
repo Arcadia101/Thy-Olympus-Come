@@ -24,7 +24,7 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputsActions"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Platformer"",
             ""id"": ""eeb2bdae-198d-4cb3-a814-66dcd795b2f6"",
             ""actions"": [
                 {
@@ -341,6 +341,334 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a705bd22-8775-4834-81be-b45429317d5f"",
+                    ""path"": ""<XRController>/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Dungeon"",
+            ""id"": ""22c121ed-7070-404a-8c47-322c787c0ee5"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""8fcc4ab5-831a-4492-8a36-0b5011664c47"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""151f2954-86e5-49bc-bf10-3fe7634350e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""f06c3387-2c9d-43f9-9c01-e5f3419e0947"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""8d012a8b-d468-4e11-9ca1-07d283028427"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc19db8f-d9ad-499d-80cc-bf4928288840"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9131e922-6e6e-433c-9bf3-f0f8ee34e0c5"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""c7b9cd68-bce0-4cad-88af-fcb5ad6b72f4"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""695db97c-442c-468b-997c-36dfed796c5f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""83c5390e-0547-41f0-8ab4-db330d8ccc02"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""29e3b537-19ba-4fd2-9354-42961b55a815"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""560626fb-0132-41ba-9b5b-5b643c0271f7"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e64c3f79-d3fb-4c06-8dfb-4f1123566cf2"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""56b13f9a-fdd7-4e7f-8b62-cce42c432bf9"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""54d996b7-3deb-4a03-86e1-f3f2bfe31b00"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f7a92727-7e02-4b97-90d4-330231ab53ce"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edfec34e-53b9-491e-a811-cc369bd83bed"",
+                    ""path"": ""<XRController>/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1aa8d41c-8341-4b51-ba5d-af21f83790ab"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5486e0c4-33b6-460b-bafa-6036abc84126"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""040e64d0-f016-4ceb-8688-0e7f809169ec"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dbb9514-a124-459b-b895-968d478fc6c7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74f491d6-b833-4250-a1aa-3c992a8d1aaa"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Touch"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30d5563a-9042-49df-b039-e4641efc77fb"",
+                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c8d8544-3f56-4c89-ba45-114916deec1f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d0c5e2d-2f8a-4ce8-ac84-0c8562cc18a2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8272dd65-ed1e-4a08-9548-ad3243f0e811"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cb31b76-0d50-4e5c-bdf6-a8e73a911687"",
+                    ""path"": ""<XRController>/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c176423c-4a30-4491-a344-b488ff5dfc04"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d29c6bbc-b99b-4349-a2b9-57bb3fefd6a8"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e17b1436-df12-4f5c-b422-9dbae3fa7eb6"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56b4f924-2301-4aa8-acc2-b5b8f4098530"",
                     ""path"": ""<XRController>/primaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -876,13 +1204,20 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Player
-        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
-        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        // Platformer
+        m_Platformer = asset.FindActionMap("Platformer", throwIfNotFound: true);
+        m_Platformer_Move = m_Platformer.FindAction("Move", throwIfNotFound: true);
+        m_Platformer_Jump = m_Platformer.FindAction("Jump", throwIfNotFound: true);
+        m_Platformer_Run = m_Platformer.FindAction("Run", throwIfNotFound: true);
+        m_Platformer_Aim = m_Platformer.FindAction("Aim", throwIfNotFound: true);
+        m_Platformer_Fire = m_Platformer.FindAction("Fire", throwIfNotFound: true);
+        // Dungeon
+        m_Dungeon = asset.FindActionMap("Dungeon", throwIfNotFound: true);
+        m_Dungeon_Move = m_Dungeon.FindAction("Move", throwIfNotFound: true);
+        m_Dungeon_Dash = m_Dungeon.FindAction("Dash", throwIfNotFound: true);
+        m_Dungeon_Run = m_Dungeon.FindAction("Run", throwIfNotFound: true);
+        m_Dungeon_Look = m_Dungeon.FindAction("Look", throwIfNotFound: true);
+        m_Dungeon_Fire = m_Dungeon.FindAction("Fire", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -953,32 +1288,32 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Player
-    private readonly InputActionMap m_Player;
-    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Run;
-    private readonly InputAction m_Player_Aim;
-    private readonly InputAction m_Player_Fire;
-    public struct PlayerActions
+    // Platformer
+    private readonly InputActionMap m_Platformer;
+    private List<IPlatformerActions> m_PlatformerActionsCallbackInterfaces = new List<IPlatformerActions>();
+    private readonly InputAction m_Platformer_Move;
+    private readonly InputAction m_Platformer_Jump;
+    private readonly InputAction m_Platformer_Run;
+    private readonly InputAction m_Platformer_Aim;
+    private readonly InputAction m_Platformer_Fire;
+    public struct PlatformerActions
     {
         private @PlayerInputsActions m_Wrapper;
-        public PlayerActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Run => m_Wrapper.m_Player_Run;
-        public InputAction @Aim => m_Wrapper.m_Player_Aim;
-        public InputAction @Fire => m_Wrapper.m_Player_Fire;
-        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public PlatformerActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Platformer_Move;
+        public InputAction @Jump => m_Wrapper.m_Platformer_Jump;
+        public InputAction @Run => m_Wrapper.m_Platformer_Run;
+        public InputAction @Aim => m_Wrapper.m_Platformer_Aim;
+        public InputAction @Fire => m_Wrapper.m_Platformer_Fire;
+        public InputActionMap Get() { return m_Wrapper.m_Platformer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerActions instance)
+        public static implicit operator InputActionMap(PlatformerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlatformerActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlatformerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlatformerActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -996,7 +1331,7 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Fire.canceled += instance.OnFire;
         }
 
-        private void UnregisterCallbacks(IPlayerActions instance)
+        private void UnregisterCallbacks(IPlatformerActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -1015,21 +1350,99 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             @Fire.canceled -= instance.OnFire;
         }
 
-        public void RemoveCallbacks(IPlayerActions instance)
+        public void RemoveCallbacks(IPlatformerActions instance)
         {
-            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlatformerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPlayerActions instance)
+        public void SetCallbacks(IPlatformerActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlatformerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlatformerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PlayerActions @Player => new PlayerActions(this);
+    public PlatformerActions @Platformer => new PlatformerActions(this);
+
+    // Dungeon
+    private readonly InputActionMap m_Dungeon;
+    private List<IDungeonActions> m_DungeonActionsCallbackInterfaces = new List<IDungeonActions>();
+    private readonly InputAction m_Dungeon_Move;
+    private readonly InputAction m_Dungeon_Dash;
+    private readonly InputAction m_Dungeon_Run;
+    private readonly InputAction m_Dungeon_Look;
+    private readonly InputAction m_Dungeon_Fire;
+    public struct DungeonActions
+    {
+        private @PlayerInputsActions m_Wrapper;
+        public DungeonActions(@PlayerInputsActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Dungeon_Move;
+        public InputAction @Dash => m_Wrapper.m_Dungeon_Dash;
+        public InputAction @Run => m_Wrapper.m_Dungeon_Run;
+        public InputAction @Look => m_Wrapper.m_Dungeon_Look;
+        public InputAction @Fire => m_Wrapper.m_Dungeon_Fire;
+        public InputActionMap Get() { return m_Wrapper.m_Dungeon; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DungeonActions set) { return set.Get(); }
+        public void AddCallbacks(IDungeonActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DungeonActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DungeonActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
+        }
+
+        private void UnregisterCallbacks(IDungeonActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
+        }
+
+        public void RemoveCallbacks(IDungeonActions instance)
+        {
+            if (m_Wrapper.m_DungeonActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDungeonActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DungeonActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DungeonActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DungeonActions @Dungeon => new DungeonActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1184,12 +1597,20 @@ public partial class @PlayerInputsActions: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
-    public interface IPlayerActions
+    public interface IPlatformerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
+    }
+    public interface IDungeonActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
     }
     public interface IUIActions

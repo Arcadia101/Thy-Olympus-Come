@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ using static PlayerInputsActions;
 namespace Platformer
 {
     [CreateAssetMenu(fileName = "InputReader", menuName = "Platformer/InputReader")]
-    public class InputReader : ScriptableObject, IPlayerActions
+    public class InputReader : ScriptableObject, IPlatformerActions, IDungeonActions
     {
         public event UnityAction<Vector2> Move = delegate { };
         public event UnityAction<Vector2> Aim = delegate { };
@@ -16,14 +17,15 @@ namespace Platformer
 
         PlayerInputsActions inputActions;
 
-        public Vector3 Direction => inputActions.Player.Move.ReadValue<Vector2>();
+        public Vector3 Direction => inputActions.Platformer.Move.ReadValue<Vector2>();
 
         void OnEnable()
         {
             if (inputActions == null)
             {
                 inputActions = new PlayerInputsActions();
-                inputActions.Player.SetCallbacks(this);
+                inputActions.Platformer.SetCallbacks(this);
+                inputActions.Dungeon.SetCallbacks(this);
             }
             
         }
@@ -56,6 +58,31 @@ namespace Platformer
         public void OnRun(InputAction.CallbackContext context)
         {
             //noop
+        }
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            //noop
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            Look.Invoke(context.ReadValue<Vector2>(), isDeviceMouse(context));
+        }
+
+        bool isDeviceMouse(InputAction.CallbackContext context) => context.control.device.name == "Mouse";
+
+        public void OnMouseControlCamera(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                EnableMouseControlCamera.Invoke();
+                break;
+                case InputActionPhase.Canceled:
+                DisableMouseControlCamera.Invoke();
+                break;
+            }
         }
     }
 }
