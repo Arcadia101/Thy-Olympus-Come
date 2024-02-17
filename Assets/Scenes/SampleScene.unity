@@ -3150,7 +3150,8 @@ MonoBehaviour:
   jumpDuration: 0.5
   jumpCooldown: 0
   jumpMaxHeight: 2
-  gravityMultiplier: 1
+  gravityMultiplier: 3
+  jumpVelocity: 0
 --- !u!136 &5866666021629499365
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3213,7 +3214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d52382942f91aea4a871a9d299cb799c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundDistance: 0.08
+  groundDistance: 0.1
   groundLayers:
     serializedVersion: 2
     m_Bits: 128

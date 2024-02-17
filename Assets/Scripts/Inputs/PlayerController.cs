@@ -37,7 +37,7 @@ namespace Platformer
 
         float currentSpeed;
         float velocity;
-        float jumpVelocity;
+        [SerializeField] float jumpVelocity;
 
         Vector3 movement;
 
@@ -129,13 +129,13 @@ namespace Platformer
                 else
                 {
                     //gradually  reduce the upward force
-                    jumpVelocity += (1- jumpTimer.Progress) * jumpForce * Time.fixedDeltaTime;
+                    jumpVelocity += (1 - jumpTimer.Progress) * jumpForce * Time.fixedDeltaTime;
                 }
             }
             else
             {
                 //gravity  pull down
-                jumpForce = Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+                jumpVelocity = Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
             }
 
             //Apply velocity
