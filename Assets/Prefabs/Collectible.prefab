@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4741310246414510913}
   - component: {fileID: 3472596654909154782}
   - component: {fileID: 8456884563564179645}
-  - component: {fileID: 328780901241600549}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &328780901241600549
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2314833393725767565}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4162571294225891486
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +95,7 @@ GameObject:
   - component: {fileID: 3600836539066244368}
   - component: {fileID: 8161977182090759088}
   - component: {fileID: 4593585512137804181}
+  - component: {fileID: 2316442237065908314}
   m_Layer: 0
   m_Name: Collectible
   m_TagString: Untagged
@@ -263,3 +242,24 @@ MonoBehaviour:
   spawnVFX: {fileID: 1141330259687333427, guid: 6718dc24203da53468af9ada8fef7d6d,
     type: 3}
   animationDuration: 1
+--- !u!135 &2316442237065908314
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162571294225891486}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
