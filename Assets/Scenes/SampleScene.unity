@@ -1566,7 +1566,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPointStrategyType: 0
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 2028870708}
+  - {fileID: 135502792}
+  - {fileID: 918322916}
+  - {fileID: 1392306373}
   collectibleData:
   - {fileID: 11400000, guid: 47f702adea1fb3b49aad9ef62b571840, type: 2}
   spawnInterval: 1
@@ -3634,7 +3638,7 @@ MonoBehaviour:
   jumpDuration: 0.5
   jumpCooldown: 0
   jumpMaxHeight: 4
-  gravityMultiplier: 25
+  gravityMultiplier: 40
   jumpVelocity: 0
 --- !u!136 &5866666021629499365
 CapsuleCollider:
