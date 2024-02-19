@@ -3637,8 +3637,7 @@ MonoBehaviour:
   jumpForce: 10
   jumpDuration: 0.5
   jumpCooldown: 0
-  jumpMaxHeight: 4
-  gravityMultiplier: 40
+  gravityMultiplier: 3
   jumpVelocity: 0
 --- !u!136 &5866666021629499365
 CapsuleCollider:

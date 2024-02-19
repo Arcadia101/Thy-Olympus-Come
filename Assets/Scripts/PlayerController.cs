@@ -28,7 +28,6 @@ namespace Platformer
         [SerializeField] float jumpForce = 10f;
         [SerializeField] float jumpDuration = 0.5f;
         [SerializeField] float jumpCooldown = 0f;
-        [SerializeField] float jumpMaxHeight = 2f;
         [SerializeField] float gravityMultiplier = 3f;
 
         Transform mainCam;
@@ -46,6 +45,8 @@ namespace Platformer
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
 
+        private StateMachine stateMachine;
+
         //Animator parameters
         static readonly int Speed = Animator.StringToHash("Speed");
 
@@ -56,13 +57,32 @@ namespace Platformer
             freeLookCam.LookAt = transform;
             freeLookCam.OnTargetObjectWarped(transform, transform.position - freeLookCam.transform.position -  Vector3.forward);
             rb.freezeRotation = true;
-
+            
+            //Setup timers
             jumpTimer = new CountdownTimer(jumpDuration);
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
             timers = new List<Timer>(2) {jumpTimer, jumpCooldownTimer};
 
+            jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+            
+            //StateMachine
+            stateMachine = new StateMachine();
+            
+            //Declare states
+            var locomotionState = new LocomotionState(this, animator);
+            var jumpState = new JumpState(this, animator);
+            
+            //Define transitions
+            At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
+            At(jumpState, locomotionState, new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning));
+            
+            //Set initial state
+            stateMachine.SetState(locomotionState);
         }
+
+        void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
+        void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
 
         void Start()
         {
@@ -81,6 +101,7 @@ namespace Platformer
         void Update()
         {
             movement =  new Vector3(input.Direction.x, 0f, input.Direction.y);
+            stateMachine.Update();
 
             HandleTimers();
             UpdateAnimator();
@@ -89,8 +110,7 @@ namespace Platformer
 
         void FixedUpdate()
         {
-            HandleJump();
-            HandleMovement();
+            stateMachine.FixedUpdate();
         }
 
 
@@ -107,7 +127,7 @@ namespace Platformer
             }
         }
 
-        private void HandleJump()
+        public void HandleJump()
         {
             //not jumping & grounded velocity = 0
             if (!jumpTimer.IsRunning && groundChecker.IsGrounded)
@@ -116,26 +136,11 @@ namespace Platformer
                 jumpTimer.Stop();
                 return;
             }
-
-            //calculate velocity por jump or fall
-            if (jumpTimer.IsRunning)
+            
+            if (!jumpTimer.IsRunning)
             {
-                float launchPoint = 0.9f;
-                if (jumpTimer.Progress > launchPoint)
-                {
-                    //calculate velocity to reach de jump height
-                    jumpVelocity = Mathf.Sqrt(2*jumpMaxHeight * MathF.Abs(Physics.gravity.y));
-                }
-                else
-                {
-                    //gradually  reduce the upward force
-                    jumpVelocity += (1 - jumpTimer.Progress) * jumpForce * Time.fixedDeltaTime;
-                }
-            }
-            else
-            {
-                //gravity  pull down
-                jumpVelocity = Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
+                // gravity apply.
+                jumpVelocity += Physics.gravity.y * gravityMultiplier * Time.fixedDeltaTime;
             }
 
             //Apply velocity
@@ -143,7 +148,7 @@ namespace Platformer
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
         }
 
-        private void HandleMovement()
+        public void HandleMovement()
         {
 
             var adjustedDirection = Quaternion.AngleAxis(mainCam.eulerAngles.y, Vector3.up) * movement;
