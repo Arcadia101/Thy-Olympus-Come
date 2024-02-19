@@ -71,6 +71,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""44eee639-9889-46d8-9ecb-6e4960b292a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill"",
+                    ""type"": ""Button"",
+                    ""id"": ""74125daa-c689-413b-adb8-b14492c304dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""975583c4-24f8-46f6-a658-81d7c70852bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -346,6 +373,72 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c7c9fd0-6caa-4f60-bce7-4b1774a1e34a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f81eaed-c1ad-42f3-8ec6-0296253594ca"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db0c20b7-4b5b-43fa-8e6c-0abca7fcc627"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1d63bde-1010-493f-ab0c-dd998a0de496"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70eae42a-52f4-4634-8753-b46e739dafd6"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22f4406b-4b94-457b-bfb5-094147018697"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1286,6 +1379,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Platformer_Fire = m_Platformer.FindAction("Fire", throwIfNotFound: true);
         m_Platformer_Run = m_Platformer.FindAction("Run", throwIfNotFound: true);
         m_Platformer_Jump = m_Platformer.FindAction("Jump", throwIfNotFound: true);
+        m_Platformer_Dash = m_Platformer.FindAction("Dash", throwIfNotFound: true);
+        m_Platformer_Skill = m_Platformer.FindAction("Skill", throwIfNotFound: true);
+        m_Platformer_SelectSkill = m_Platformer.FindAction("SelectSkill", throwIfNotFound: true);
         // Dungeon
         m_Dungeon = asset.FindActionMap("Dungeon", throwIfNotFound: true);
         m_Dungeon_Move = m_Dungeon.FindAction("Move", throwIfNotFound: true);
@@ -1372,6 +1468,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Platformer_Fire;
     private readonly InputAction m_Platformer_Run;
     private readonly InputAction m_Platformer_Jump;
+    private readonly InputAction m_Platformer_Dash;
+    private readonly InputAction m_Platformer_Skill;
+    private readonly InputAction m_Platformer_SelectSkill;
     public struct PlatformerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1381,6 +1480,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Platformer_Fire;
         public InputAction @Run => m_Wrapper.m_Platformer_Run;
         public InputAction @Jump => m_Wrapper.m_Platformer_Jump;
+        public InputAction @Dash => m_Wrapper.m_Platformer_Dash;
+        public InputAction @Skill => m_Wrapper.m_Platformer_Skill;
+        public InputAction @SelectSkill => m_Wrapper.m_Platformer_SelectSkill;
         public InputActionMap Get() { return m_Wrapper.m_Platformer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1405,6 +1507,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @Skill.started += instance.OnSkill;
+            @Skill.performed += instance.OnSkill;
+            @Skill.canceled += instance.OnSkill;
+            @SelectSkill.started += instance.OnSelectSkill;
+            @SelectSkill.performed += instance.OnSelectSkill;
+            @SelectSkill.canceled += instance.OnSelectSkill;
         }
 
         private void UnregisterCallbacks(IPlatformerActions instance)
@@ -1424,6 +1535,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @Skill.started -= instance.OnSkill;
+            @Skill.performed -= instance.OnSkill;
+            @Skill.canceled -= instance.OnSkill;
+            @SelectSkill.started -= instance.OnSelectSkill;
+            @SelectSkill.performed -= instance.OnSelectSkill;
+            @SelectSkill.canceled -= instance.OnSelectSkill;
         }
 
         public void RemoveCallbacks(IPlatformerActions instance)
@@ -1697,6 +1817,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnSkill(InputAction.CallbackContext context);
+        void OnSelectSkill(InputAction.CallbackContext context);
     }
     public interface IDungeonActions
     {

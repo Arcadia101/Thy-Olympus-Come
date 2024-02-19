@@ -14,7 +14,12 @@ namespace Platformer
         public event UnityAction<Vector2, bool> Look = delegate { };
         public event UnityAction EnableMouseControlCamera = delegate { };
         public event UnityAction DisableMouseControlCamera = delegate { };
+        public event UnityAction<bool> Fire = delegate { };
+        public event UnityAction<bool> Run = delegate { };
         public event UnityAction<bool> Jump = delegate { };
+        public event UnityAction<bool> Dash = delegate { };
+        public event UnityAction<bool> Skill = delegate { };
+        public event UnityAction<bool> SelectingSkill = delegate { };
 
         PlayerInputActions inputActions;
 
@@ -47,7 +52,15 @@ namespace Platformer
 
         public void OnFire(InputAction.CallbackContext context)
         {
-            //noop
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Fire.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    Fire.Invoke(false);
+                    break;
+            }
         }
 
         public void OnJump(InputAction.CallbackContext context)
@@ -66,12 +79,54 @@ namespace Platformer
 
         public void OnRun(InputAction.CallbackContext context)
         {
-            //noop
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Run.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    Run.Invoke(false);
+                    break;
+            }
         }
 
         public void OnDash(InputAction.CallbackContext context)
         {
-            //noop
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Dash.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    Dash.Invoke(false);
+                    break;
+            }
+        }
+
+        public void OnSkill(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    Skill.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    Skill.Invoke(false);
+                    break;
+            }
+        }
+
+        public void OnSelectSkill(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    SelectingSkill.Invoke(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    SelectingSkill.Invoke(false);
+                    break;
+            }
         }
 
         public void OnLook(InputAction.CallbackContext context)
