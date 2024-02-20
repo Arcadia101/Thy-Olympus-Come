@@ -29,6 +29,12 @@ namespace Platformer
         [SerializeField] float jumpDuration = 0.5f;
         [SerializeField] float jumpCooldown = 0f;
         [SerializeField] float gravityMultiplier = 3f;
+        
+        [Header("Dash Settings")]
+        
+        [SerializeField] float dashForce = 10f;
+        [SerializeField] float dashDuration = 1f;
+        [SerializeField] float dashCooldown = 2f;
 
         Transform mainCam;
 
@@ -37,6 +43,7 @@ namespace Platformer
         float currentSpeed;
         float velocity;
         [SerializeField] float jumpVelocity;
+        [SerializeField] float dashVelocity = 1f;
 
         Vector3 movement;
 
@@ -44,6 +51,8 @@ namespace Platformer
 
         CountdownTimer jumpTimer;
         CountdownTimer jumpCooldownTimer;
+        CountdownTimer dashTimer;
+        CountdownTimer dashCooldownTimer;
 
         private StateMachine stateMachine;
 
@@ -61,10 +70,20 @@ namespace Platformer
             //Setup timers
             jumpTimer = new CountdownTimer(jumpDuration);
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-            timers = new List<Timer>(2) {jumpTimer, jumpCooldownTimer};
+            dashTimer = new CountdownTimer(dashDuration);
+            dashCooldownTimer = new CountdownTimer(dashCooldown);
+            
+            timers = new List<Timer>(4) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer};
 
             jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+            
+            dashTimer.OnTimerStart += () => dashVelocity = dashForce;
+            dashTimer.OnTimerStop += () =>
+            {
+                dashVelocity = 1f;
+                dashCooldownTimer.Start();
+            };
             
             //StateMachine
             stateMachine = new StateMachine();
@@ -72,10 +91,14 @@ namespace Platformer
             //Declare states
             var locomotionState = new LocomotionState(this, animator);
             var jumpState = new JumpState(this, animator);
+            var dashState = new DashState(this, animator);
             
             //Define transitions
             At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
-            At(jumpState, locomotionState, new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning));
+            //At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
+            //At(jumpState, dashState, new FuncPredicate(() => jumpTimer.IsRunning && dashTimer.IsRunning));
+            Any(dashState, new FuncPredicate(() => dashTimer.IsRunning));
+            Any(locomotionState, new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning && !dashTimer.IsRunning));
             
             //Set initial state
             stateMachine.SetState(locomotionState);
@@ -92,11 +115,13 @@ namespace Platformer
         void OnEnable()
         {
             input.Jump += OnJump;
+            input.Dash += OnDash;
         }
 
         void OnDisable()
         {
             input.Jump -= OnJump;
+            input.Dash -= OnDash;
         }
         void Update()
         {
@@ -170,7 +195,7 @@ namespace Platformer
         private void HandleHorizontalMovement(Vector3 adjustedDirection)
         {
             //move Player
-            Vector3 velocity = adjustedDirection * (moveSpeed * Time.fixedDeltaTime);
+            Vector3 velocity = adjustedDirection * (moveSpeed * dashVelocity * Time.fixedDeltaTime);
             rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
         }
 
@@ -195,6 +220,18 @@ namespace Platformer
             else if (!performed && jumpTimer.IsRunning)
             {
                 jumpTimer.Stop();
+            }
+        }
+        
+        void OnDash(bool performed)
+        {
+            if (performed && !dashTimer.IsRunning && !dashCooldownTimer.IsRunning)
+            {
+                dashTimer.Start();
+            }
+            else if (!performed && dashTimer.IsRunning)
+            {
+                dashTimer.Stop();
             }
         }
     }

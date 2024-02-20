@@ -3638,7 +3638,11 @@ MonoBehaviour:
   jumpDuration: 0.5
   jumpCooldown: 0
   gravityMultiplier: 3
+  dashForce: 10
+  dashDuration: 1
+  dashCooldown: 2
   jumpVelocity: 0
+  dashVelocity: 1
 --- !u!136 &5866666021629499365
 CapsuleCollider:
   m_ObjectHideFlags: 0

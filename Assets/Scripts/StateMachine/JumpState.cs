@@ -1,18 +1,22 @@
-﻿using Platformer;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class JumpState : BaseState
+namespace Platformer
 {
-    public JumpState(PlayerController player, Animator animator) : base(player, animator) { }
-
-    public override void OnEnter()
+    public class JumpState : BaseState
     {
-        animator.CrossFade(JumpHash,crossFadeDuration);
-    }
+        public JumpState(PlayerController player, Animator animator) : base(player, animator)
+        {
+        }
 
-    public override void FixedUpdate()
-    {
-        player.HandleJump();
-        player.HandleMovement();
+        public override void OnEnter()
+        {
+            animator.CrossFade(JumpHash, crossFadeDuration);
+        }
+
+        public override void FixedUpdate()
+        {
+            player.HandleJump();
+            player.HandleMovement();
+        }
     }
 }
