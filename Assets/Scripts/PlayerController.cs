@@ -33,8 +33,8 @@ namespace Platformer
         [Header("Dash Settings")]
         
         [SerializeField] float dashForce = 10f;
-        [SerializeField] float dashDuration = 1f;
-        [SerializeField] float dashCooldown = 2f;
+        [SerializeField] float dashDuration = 0.2f;
+        [SerializeField] float dashCooldown = 1f;
 
         Transform mainCam;
 
@@ -95,8 +95,7 @@ namespace Platformer
             
             //Define transitions
             At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
-            //At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
-            //At(jumpState, dashState, new FuncPredicate(() => jumpTimer.IsRunning && dashTimer.IsRunning));
+            At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
             Any(dashState, new FuncPredicate(() => dashTimer.IsRunning));
             Any(locomotionState, new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning && !dashTimer.IsRunning));
             
