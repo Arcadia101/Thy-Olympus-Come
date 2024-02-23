@@ -44,6 +44,7 @@ namespace Platformer
         float velocity;
         [SerializeField] float jumpVelocity;
         [SerializeField] float dashVelocity = 1f;
+        [SerializeField] private float jumpSpeed;
 
         Vector3 movement;
 
@@ -58,6 +59,7 @@ namespace Platformer
 
         //Animator parameters
         static readonly int Speed = Animator.StringToHash("Speed");
+        static readonly int Jump = Animator.StringToHash("Jump");
 
         void Awake()
         {
@@ -96,6 +98,8 @@ namespace Platformer
             //Define transitions
             At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
             At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
+            At(dashState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded && !dashTimer.IsRunning));
+            At(locomotionState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded));
             Any(dashState, new FuncPredicate(() => dashTimer.IsRunning));
             Any(locomotionState, new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning && !dashTimer.IsRunning));
             
@@ -126,6 +130,19 @@ namespace Platformer
         {
             movement =  new Vector3(input.Direction.x, 0f, input.Direction.y);
             stateMachine.Update();
+            if (jumpVelocity >0)
+            {
+                jumpSpeed = 1;
+            }
+
+            else if (jumpVelocity < 0)
+            {
+                jumpSpeed = -1;
+            }
+            else
+            {
+                jumpSpeed = 0;
+            }
 
             HandleTimers();
             UpdateAnimator();
@@ -141,6 +158,7 @@ namespace Platformer
         private void UpdateAnimator()
         {
             animator.SetFloat(Speed,currentSpeed);
+            animator.SetFloat(Jump, jumpSpeed);
         }
 
         private void HandleTimers()
