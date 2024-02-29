@@ -10,6 +10,7 @@ namespace Platformer
         [SerializeField, Range(0f, 25f)] private float detectionRadius = 10f; // Large circle araund the enemy.
         [SerializeField, Range(0f, 25f)] private float innerDetectionRadius = 5f; // Small circle araund the enemy.
         [SerializeField, Range(0f, 5f)] private float detectionCooldown = 1f; // Time between detections.
+        [SerializeField, Range(0f, 25f)] private float attackRange = 5f; // Distance from Enemy to Player to attack.
         
         public Transform player { get; private set; }
         private CountdownTimer detectionTimer;
@@ -28,6 +29,12 @@ namespace Platformer
         public bool CanDetectPlayer()
         {
             return detectionTimer.IsRunning || detectionStrategy.Execute(player, transform, detectionTimer);
+        }
+
+        public bool CanAttackPlayer()
+        {
+            var directionToPlayer = player.position - transform.position;
+            return directionToPlayer.magnitude <= attackRange;
         }
 
         public void SetDetectionStrategy(IDetectionStrategy detectionStrategy) =>
