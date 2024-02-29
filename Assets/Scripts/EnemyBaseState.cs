@@ -8,6 +8,14 @@ namespace Platformer
         protected readonly Animator animator;
         
         //Get Animation Hashes.
+        protected static readonly int IdleHash = Animator.StringToHash("Idle");
+        protected static readonly int WalkHash = Animator.StringToHash("Walk");
+        protected static readonly int RunHash = Animator.StringToHash("Run");
+        protected static readonly int HurtHash = Animator.StringToHash("Hurt");
+        protected static readonly int AttackHash = Animator.StringToHash("Attack");
+        protected static readonly int RangedAttackHash = Animator.StringToHash("RangedAttack");
+        protected static readonly int DieHash = Animator.StringToHash("Die");
+        
         
         
         protected const float crossFadeDuration = 0.1f;
@@ -19,22 +27,22 @@ namespace Platformer
         }
         public virtual void OnEnter()
         {
-            throw new System.NotImplementedException();
+            //noop
         }
 
         public virtual void Update()
         {
-            throw new System.NotImplementedException();
+            //noop
         }
 
         public virtual void FixedUpdate()
         {
-            throw new System.NotImplementedException();
+            //noop
         }
 
         public virtual void OnExit()
         {
-            throw new System.NotImplementedException();
+            //noop
         }
     }
 }

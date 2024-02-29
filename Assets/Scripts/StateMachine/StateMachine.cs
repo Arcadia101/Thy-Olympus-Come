@@ -29,7 +29,7 @@ namespace Platformer
             current.State?.OnEnter();
         }
 
-        public void ChangeState(IState state)
+        private void ChangeState(IState state)
         {
             if (state == current.State) return;
 
@@ -61,7 +61,7 @@ namespace Platformer
         
         public void AddAnyTransition(IState to, IPredicate condition)
         {
-            anyTransitions.Add(new Transition(to, condition));
+            anyTransitions.Add(new Transition(GetOrAddNode(to).State, condition));
         }
 
         StateNode GetOrAddNode(IState state)
