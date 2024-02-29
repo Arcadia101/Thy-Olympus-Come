@@ -2201,9 +2201,10 @@ GameObject:
   - component: {fileID: 4923812530024415978}
   - component: {fileID: 1507245209479546254}
   - component: {fileID: 2840882742438277016}
+  - component: {fileID: 4737795320848998930}
   m_Layer: 0
   m_Name: Dragon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2216,7 +2217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3724246906958662652}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.7, y: -0.07500005, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -2283,6 +2284,8 @@ MonoBehaviour:
   playerDetector: {fileID: 2840882742438277016}
   animator: {fileID: 5927912473920419565}
   wanderRadius: 12
+  timeBetweenAttacks: 1
+  IsRanged: 1
 --- !u!114 &2840882742438277016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2299,6 +2302,21 @@ MonoBehaviour:
   detectionRadius: 12
   innerDetectionRadius: 4.5
   detectionCooldown: 1
+  attackRange: 8
+--- !u!114 &4737795320848998930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3724246906958662652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0672849f536f472c927683895c96d1b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  playerHealthChannel: {fileID: 0}
 --- !u!1 &3735431465702231572
 GameObject:
   m_ObjectHideFlags: 0

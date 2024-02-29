@@ -36,6 +36,13 @@ namespace Platformer
         [SerializeField] float dashDuration = 0.2f;
         [SerializeField] float dashCooldown = 1f;
 
+        [Header("Attack Settings")]
+        
+        [SerializeField] private float attackCooldown = 0.5f;
+        [SerializeField] private float attackDistance = 1f;
+        [SerializeField] private int attackDamage = 10;
+        
+
         Transform mainCam;
 
         const float ZeroF = 0f;
@@ -54,6 +61,7 @@ namespace Platformer
         CountdownTimer jumpCooldownTimer;
         CountdownTimer dashTimer;
         CountdownTimer dashCooldownTimer;
+        CountdownTimer attackTimer;
 
         private StateMachine stateMachine;
 
@@ -69,43 +77,10 @@ namespace Platformer
             freeLookCam.OnTargetObjectWarped(transform, transform.position - freeLookCam.transform.position -  Vector3.forward);
             rb.freezeRotation = true;
             
-            //Setup timers
-            jumpTimer = new CountdownTimer(jumpDuration);
-            jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-            dashTimer = new CountdownTimer(dashDuration);
-            dashCooldownTimer = new CountdownTimer(dashCooldown);
-            
-            timers = new List<Timer>(4) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer};
-
-            jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
-            jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
-            
-            dashTimer.OnTimerStart += () => dashVelocity = dashForce;
-            dashTimer.OnTimerStop += () =>
-            {
-                dashVelocity = 1f;
-                dashCooldownTimer.Start();
-            };
-            
-            //StateMachine
-            stateMachine = new StateMachine();
-            
-            //Declare states
-            var locomotionState = new LocomotionState(this, animator);
-            var jumpState = new JumpState(this, animator);
-            var dashState = new DashState(this, animator);
-            
-            //Define transitions
-            At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
-            At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
-            At(dashState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded && !dashTimer.IsRunning));
-            At(locomotionState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded));
-            Any(dashState, new FuncPredicate(() => dashTimer.IsRunning));
-            Any(locomotionState, new FuncPredicate(() => groundChecker.IsGrounded && !jumpTimer.IsRunning && !dashTimer.IsRunning));
-            
-            //Set initial state
-            stateMachine.SetState(locomotionState);
+            SetupTimers();
+            SetupStateMachine();
         }
+
 
         void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
         void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
@@ -119,12 +94,14 @@ namespace Platformer
         {
             input.Jump += OnJump;
             input.Dash += OnDash;
+            input.Attack += OnAttack;
         }
 
         void OnDisable()
         {
             input.Jump -= OnJump;
             input.Dash -= OnDash;
+            input.Attack -= OnAttack;
         }
         void Update()
         {
@@ -166,6 +143,21 @@ namespace Platformer
             foreach (var timer in timers)
             {
                 timer.Tick(Time.deltaTime);
+            }
+        }
+
+        public void Attack()
+        {
+            Vector3 attackPos = transform.position + transform.forward;
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPos, attackDistance);
+
+            foreach (var enemy in hitEnemies)
+            {
+                Debug.Log(enemy.name);
+                if (enemy.CompareTag("Enemy"))
+                {
+                    enemy.GetComponent<Health>().TakeDamage(attackDamage);
+                }
             }
         }
 
@@ -250,6 +242,70 @@ namespace Platformer
             {
                 dashTimer.Stop();
             }
+        }
+        
+        void OnAttack()
+        {
+            if (!attackTimer.IsRunning)
+            {
+                dashTimer.Start();
+            }
+        }
+        
+        private void SetupStateMachine()
+        {
+            //StateMachine
+            stateMachine = new StateMachine();
+            
+            //Declare states
+            var locomotionState = new LocomotionState(this, animator);
+            var jumpState = new JumpState(this, animator);
+            var dashState = new DashState(this, animator);
+            var attackState = new AttackState(this, animator);
+            
+            //Define transitions
+            At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
+            At(locomotionState, dashState, new FuncPredicate(() => dashTimer.IsRunning));
+            At(dashState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded && !dashTimer.IsRunning));
+            At(locomotionState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded));
+            At(locomotionState, attackState, new FuncPredicate(() => attackTimer.IsRunning));
+            At(attackState, locomotionState, new FuncPredicate(() => !attackTimer.IsRunning));
+            Any(dashState, new FuncPredicate(() => dashTimer.IsRunning));
+            Any(locomotionState, new FuncPredicate(ReturnToLocomotionState));
+            
+            //Set initial state
+            stateMachine.SetState(locomotionState);
+        }
+
+        private bool ReturnToLocomotionState()
+        {
+            return groundChecker.IsGrounded 
+                   && !attackTimer.IsRunning 
+                   && !jumpTimer.IsRunning 
+                   && !dashTimer.IsRunning;
+        }
+
+        private void SetupTimers()
+        {
+            //Setup timers
+            jumpTimer = new CountdownTimer(jumpDuration);
+            jumpCooldownTimer = new CountdownTimer(jumpCooldown);
+            dashTimer = new CountdownTimer(dashDuration);
+            dashCooldownTimer = new CountdownTimer(dashCooldown);
+            
+            timers = new List<Timer>(5) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer, attackTimer};
+
+            jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
+            jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
+            
+            dashTimer.OnTimerStart += () => dashVelocity = dashForce;
+            dashTimer.OnTimerStop += () =>
+            {
+                dashVelocity = 1f;
+                dashCooldownTimer.Start();
+            };
+
+            attackTimer = new CountdownTimer(attackCooldown);
         }
     }
 }

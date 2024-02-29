@@ -17,6 +17,7 @@ namespace Platformer
         [Header("Settings")] 
         [SerializeField] private float wanderRadius = 5f;
         [SerializeField] private float timeBetweenAttacks = 1f;
+        [SerializeField] private int attackDamage = 10;
         [SerializeField] public bool IsRanged;
         
         private StateMachine stateMachine;
@@ -61,7 +62,7 @@ namespace Platformer
             if (attackTimer.IsRunning) return;
 
             attackTimer.Start();
-            Debug.Log("attacking");
+            playerDetector.playerHealth.TakeDamage(attackDamage);
         }
     }
 }

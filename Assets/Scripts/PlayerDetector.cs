@@ -13,14 +13,20 @@ namespace Platformer
         [SerializeField, Range(0f, 25f)] private float attackRange = 5f; // Distance from Enemy to Player to attack.
         
         public Transform player { get; private set; }
+        public Health playerHealth { get; private set; }
         private CountdownTimer detectionTimer;
 
         private IDetectionStrategy detectionStrategy;
 
+        private void Awake()
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform; // Make sure to TAG the player!
+            playerHealth = player.GetComponent<Health>();
+        }
+
         private void Start()
         {
             detectionTimer = new CountdownTimer(detectionCooldown);
-            player = GameObject.FindGameObjectWithTag("Player").transform; // Make sure to TAG the player!
             detectionStrategy = new ConeDetectionStrategy(detectionAngle, detectionRadius, innerDetectionRadius);
         }
 

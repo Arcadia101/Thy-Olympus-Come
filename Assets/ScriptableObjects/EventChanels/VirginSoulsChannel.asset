@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d7352a36d634a35b87922778d0bfb37, type: 3}
-  m_Name: VirginSoulsCount
+  m_Name: VirginSoulsChannel
   m_EditorClassIdentifier: 

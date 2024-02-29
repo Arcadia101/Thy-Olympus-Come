@@ -14,7 +14,7 @@ namespace Platformer
         public event UnityAction<Vector2, bool> Look = delegate { };
         public event UnityAction EnableMouseControlCamera = delegate { };
         public event UnityAction DisableMouseControlCamera = delegate { };
-        public event UnityAction<bool> Fire = delegate { };
+        public event UnityAction Attack = delegate { };
         public event UnityAction<bool> Run = delegate { };
         public event UnityAction<bool> Jump = delegate { };
         public event UnityAction<bool> Dash = delegate { };
@@ -52,14 +52,9 @@ namespace Platformer
 
         public void OnFire(InputAction.CallbackContext context)
         {
-            switch (context.phase)
+            if (context.phase == InputActionPhase.Started)
             {
-                case InputActionPhase.Started:
-                    Fire.Invoke(true);
-                    break;
-                case InputActionPhase.Canceled:
-                    Fire.Invoke(false);
-                    break;
+                Attack.Invoke();
             }
         }
 

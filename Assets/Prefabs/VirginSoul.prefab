@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4593585512137804181}
   - component: {fileID: 2316442237065908314}
   m_Layer: 0
-  m_Name: Collectible
+  m_Name: VirginSoul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,6 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176bf03462f34c4ea1a276b75b8389b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoulsValue: 1
+  virginSoulsChanel: {fileID: 11400000, guid: 3a3404bf206a05446ab13000e931f512, type: 2}
 --- !u!82 &8161977182090759088
 AudioSource:
   m_ObjectHideFlags: 0

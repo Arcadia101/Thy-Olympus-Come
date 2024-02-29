@@ -1031,11 +1031,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 153655366638308197, guid: bdc83d436fe726f43be34268a97eb045,
-        type: 3}
-      propertyPath: attackRange
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 5965831138000119356, guid: bdc83d436fe726f43be34268a97eb045,
         type: 3}
       propertyPath: m_Name
@@ -1104,16 +1099,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1507245209479546254, guid: 42f276455aed81a4794e07ac98748475,
-        type: 3}
-      propertyPath: IsRanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2840882742438277016, guid: 42f276455aed81a4794e07ac98748475,
-        type: 3}
-      propertyPath: attackRange
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 3724246906958662652, guid: 42f276455aed81a4794e07ac98748475,
         type: 3}
       propertyPath: m_Name
