@@ -15,10 +15,10 @@ namespace Platformer
         public event UnityAction EnableMouseControlCamera = delegate { };
         public event UnityAction DisableMouseControlCamera = delegate { };
         public event UnityAction Attack = delegate { };
+        public event UnityAction Skill = delegate { };
         public event UnityAction<bool> Run = delegate { };
         public event UnityAction<bool> Jump = delegate { };
         public event UnityAction<bool> Dash = delegate { };
-        public event UnityAction<bool> Skill = delegate { };
         public event UnityAction<bool> SelectingSkill = delegate { };
 
         PlayerInputActions inputActions;
@@ -100,14 +100,9 @@ namespace Platformer
 
         public void OnSkill(InputAction.CallbackContext context)
         {
-            switch (context.phase)
+            if (context.phase == InputActionPhase.Started)
             {
-                case InputActionPhase.Started:
-                    Skill.Invoke(true);
-                    break;
-                case InputActionPhase.Canceled:
-                    Skill.Invoke(false);
-                    break;
+                Skill.Invoke();
             }
         }
 

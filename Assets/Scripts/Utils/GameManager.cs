@@ -9,6 +9,7 @@ namespace Platformer
 
         public int VirginsSoulsCollected { get; private set; }
         public GameObject player { get; private set; }
+        public Skill currentSkill { get; private set; }
 
         private void Awake()
         {
@@ -34,6 +35,15 @@ namespace Platformer
                 player = GameObject.FindWithTag("Player");
             }
             player.GetComponent<PlayerEther>().IncrementEther(ether);
+        }
+        public void CurrentSkillListener()
+        {
+            if (player == null)
+            {
+                player = GameObject.FindWithTag("Player");
+            }
+
+            currentSkill = player.GetComponent<Skills>().publicCurrentSkill;
         }
         
     }

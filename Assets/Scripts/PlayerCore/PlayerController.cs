@@ -16,6 +16,7 @@ namespace Platformer
         [SerializeField, Self] GroundChecker groundChecker;
         [SerializeField, Self] Animator animator;
         [SerializeField, Self] private PlayerEther playerEther;
+        [SerializeField, Self] private Skills playerSkills;
         [SerializeField, Anywhere] CinemachineFreeLook freeLookCam;
         [SerializeField, Anywhere] InputReader input;
 
@@ -43,6 +44,12 @@ namespace Platformer
         [SerializeField] private float attackDistance = 1f;
         [SerializeField] private int attackDamage = 10;
         
+        [Header("Skills Settings")]
+        
+        [SerializeField] float skillDamage;
+        [SerializeField] float SkillDuration = 1f;
+        [SerializeField] float skillCooldown = 2f;
+        
 
         Transform mainCam;
 
@@ -63,6 +70,8 @@ namespace Platformer
         CountdownTimer dashTimer;
         CountdownTimer dashCooldownTimer;
         CountdownTimer attackTimer;
+        CountdownTimer skillTimer;
+        CountdownTimer skillCountdownTimer;
 
         private StateMachine stateMachine;
 
@@ -88,6 +97,7 @@ namespace Platformer
 
         void Start()
         {
+            GameManager.Instance.CurrentSkillListener();
             input.EnablePlayerActions();
         }
 
@@ -96,6 +106,7 @@ namespace Platformer
             input.Jump += OnJump;
             input.Dash += OnDash;
             input.Attack += OnAttack;
+            input.Skill += OnSkill;
         }
 
         void OnDisable()
@@ -103,6 +114,7 @@ namespace Platformer
             input.Jump -= OnJump;
             input.Dash -= OnDash;
             input.Attack -= OnAttack;
+            input.Skill -= OnSkill;
         }
         void Update()
         {
@@ -136,6 +148,11 @@ namespace Platformer
             {
                 timer.Tick(Time.deltaTime);
             }
+        }
+
+        public void Skill()
+        {
+            playerSkills.UseSkill();
         }
 
         public void Attack()
@@ -244,6 +261,15 @@ namespace Platformer
             }
         }
         
+        void OnSkill()
+        {
+            GameManager.Instance.CurrentSkillListener();
+            if (!skillTimer.IsRunning && !skillCountdownTimer.IsRunning)
+            {
+                skillTimer.Start();
+            }
+        }
+        
         private void SetupStateMachine()
         {
             //StateMachine
@@ -285,8 +311,10 @@ namespace Platformer
             dashTimer = new CountdownTimer(dashDuration);
             dashCooldownTimer = new CountdownTimer(dashCooldown);
             attackTimer = new CountdownTimer(attackCooldown);
+            skillTimer = new CountdownTimer(SkillDuration);
+            skillCountdownTimer = new CountdownTimer(skillCooldown);
             
-            timers = new List<Timer>(5) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer, attackTimer};
+            timers = new List<Timer>(7) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer, attackTimer, skillTimer,skillCountdownTimer};
 
             jumpTimer.OnTimerStart += () => jumpVelocity = jumpForce;
             jumpTimer.OnTimerStop += () => jumpCooldownTimer.Start();
@@ -297,6 +325,8 @@ namespace Platformer
                 dashVelocity = 1f;
                 dashCooldownTimer.Start();
             };
+
+            skillTimer.OnTimerStop += () => skillCountdownTimer.Start();
 
         }
         

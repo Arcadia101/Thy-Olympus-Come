@@ -1365,6 +1365,7 @@ GameObject:
   - component: {fileID: 1701781012549538144}
   - component: {fileID: 8594560380256773772}
   - component: {fileID: 4159783542129073489}
+  - component: {fileID: 3772671496569737593}
   - component: {fileID: 6054767646688520850}
   - component: {fileID: 3970502466114025811}
   - component: {fileID: 3653868734469319615}
@@ -1431,6 +1432,8 @@ MonoBehaviour:
   rb: {fileID: 3970502466114025811}
   groundChecker: {fileID: 3653868734469319615}
   animator: {fileID: 8594560380256773772}
+  playerEther: {fileID: 5839396076340588766}
+  playerSkills: {fileID: 3772671496569737593}
   freeLookCam: {fileID: 0}
   input: {fileID: 11400000, guid: 7ed0d7beb97527745a2fc88463669132, type: 2}
   moveSpeed: 300
@@ -1446,9 +1449,27 @@ MonoBehaviour:
   attackCooldown: 0.5
   attackDistance: 1
   attackDamage: 10
+  skillDamage: 0
+  SkillDuration: 1
+  skillCooldown: 2
   jumpVelocity: 0
   dashVelocity: 1
   jumpSpeed: 0
+--- !u!114 &3772671496569737593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608982810405206535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbbd2ecdf590d54c8a0174cce4d2d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 4159783542129073489}
+  currentSkill: 0
+  defaultSkill: 0
 --- !u!136 &6054767646688520850
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1556,6 +1577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEther: 100
   playerEtherChannel: {fileID: 11400000, guid: b15a63101ff021d4ca4566d0c60e7b2e, type: 2}
+  currentEther: 0
 --- !u!1 &5621083086460650643
 GameObject:
   m_ObjectHideFlags: 0
