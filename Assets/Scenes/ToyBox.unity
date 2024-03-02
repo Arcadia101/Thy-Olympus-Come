@@ -367,6 +367,12 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!95 &465205495 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8594560380256773772, guid: 5c9b84a58aecddd45bc578a5b0eadfc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4797744705355388605}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &482317909
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +946,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3772671496569737593, guid: 5c9b84a58aecddd45bc578a5b0eadfc4,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 465205495}
     - target: {fileID: 4159783542129073489, guid: 5c9b84a58aecddd45bc578a5b0eadfc4,
         type: 3}
       propertyPath: freeLookCam
