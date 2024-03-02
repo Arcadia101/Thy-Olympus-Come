@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740293549d18426098f2eb105629100a, type: 3}
-  m_Name: Coin
+  m_Name: VirginSoul
   m_EditorClassIdentifier: 
   prefab: {fileID: 4162571294225891486, guid: 6dc55f812aac9404e99684f263b2ffea, type: 3}
-  score: 10
+  score: 1

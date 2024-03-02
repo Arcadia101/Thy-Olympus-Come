@@ -2,16 +2,16 @@
 
 namespace Platformer
 {
-    public class Collectible : Entity
+    public class Ether : Entity
     {
-        [SerializeField] private int SoulsValue = 1;
-        [SerializeField] private IntEventChannel virginSoulsChanel;
+        [SerializeField] private float EtherValue = 10f;
+        [SerializeField] private FloatEventChannel etherChanel;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                virginSoulsChanel.Invoke(SoulsValue);
+                etherChanel.Invoke(EtherValue);
                 Destroy(gameObject);
             }
         }

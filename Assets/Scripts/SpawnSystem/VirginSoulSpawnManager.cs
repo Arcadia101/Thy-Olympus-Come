@@ -4,12 +4,12 @@ using Utilities;
 
 namespace Platformer
 {
-    public class CollectibleSpawnManager : EntitySpawnManager
+    public class VirginSoulSpawnManager : EntitySpawnManager
     {
-        [SerializeField] private CollectibleData[] collectibleData;
+        [SerializeField] private CollectibleData[] virginSoulData;
         [SerializeField] private float spawnInterval = 1f;
 
-        private EntitySpawner<Collectible> spawner;
+        private EntitySpawner<VirginSoul> spawner;
 
         private CountdownTimer spawnTimer;
         private int counter;
@@ -18,7 +18,7 @@ namespace Platformer
         {
             base.Awake();
 
-            spawner = new EntitySpawner<Collectible>(new EntityFactory<Collectible>(collectibleData),
+            spawner = new EntitySpawner<VirginSoul>(new EntityFactory<VirginSoul>(virginSoulData),
                 spawnPointStrategy);
 
             spawnTimer = new CountdownTimer(spawnInterval);

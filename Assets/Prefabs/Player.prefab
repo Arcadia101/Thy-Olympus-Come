@@ -1370,6 +1370,7 @@ GameObject:
   - component: {fileID: 3653868734469319615}
   - component: {fileID: 2520292151110518326}
   - component: {fileID: 8606618755682937823}
+  - component: {fileID: 5839396076340588766}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1442,6 +1443,9 @@ MonoBehaviour:
   dashForce: 10
   dashDuration: 0.1
   dashCooldown: 0
+  attackCooldown: 0.5
+  attackDistance: 1
+  attackDamage: 10
   jumpVelocity: 0
   dashVelocity: 1
   jumpSpeed: 0
@@ -1538,6 +1542,20 @@ MonoBehaviour:
   maxHealth: 100
   playerHealthChannel: {fileID: 11400000, guid: a5a22516465e49c4b962e26d6839f518,
     type: 2}
+--- !u!114 &5839396076340588766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5608982810405206535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0f1da6ce0005547ab9f143d9e87b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEther: 100
+  playerEtherChannel: {fileID: 11400000, guid: b15a63101ff021d4ca4566d0c60e7b2e, type: 2}
 --- !u!1 &5621083086460650643
 GameObject:
   m_ObjectHideFlags: 0

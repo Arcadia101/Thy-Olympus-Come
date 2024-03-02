@@ -945,11 +945,6 @@ PrefabInstance:
       propertyPath: freeLookCam
       value: 
       objectReference: {fileID: 1154286588}
-    - target: {fileID: 4159783542129073489, guid: 5c9b84a58aecddd45bc578a5b0eadfc4,
-        type: 3}
-      propertyPath: attackCooldown
-      value: 1.1
-      objectReference: {fileID: 0}
     - target: {fileID: 5608982810405206535, guid: 5c9b84a58aecddd45bc578a5b0eadfc4,
         type: 3}
       propertyPath: m_Name
