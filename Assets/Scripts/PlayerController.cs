@@ -15,6 +15,7 @@ namespace Platformer
         [SerializeField, Self] Rigidbody rb;
         [SerializeField, Self] GroundChecker groundChecker;
         [SerializeField, Self] Animator animator;
+        [SerializeField, Self] private PlayerEther playerEther;
         [SerializeField, Anywhere] CinemachineFreeLook freeLookCam;
         [SerializeField, Anywhere] InputReader input;
 
@@ -107,25 +108,16 @@ namespace Platformer
         {
             movement =  new Vector3(input.Direction.x, 0f, input.Direction.y);
             stateMachine.Update();
-            if (jumpVelocity >0)
-            {
-                jumpSpeed = 1;
-            }
-
-            else if (jumpVelocity < 0)
-            {
-                jumpSpeed = -1;
-            }
-            else
-            {
-                jumpSpeed = 0;
-            }
+            JumpingOrFalling();
 
             HandleTimers();
             UpdateAnimator();
+            if (!playerEther.IsFull)
+            {
+                playerEther.IncrementEther(Time.deltaTime);
+            }
         }
-
-
+        
         void FixedUpdate()
         {
             stateMachine.FixedUpdate();
@@ -306,6 +298,23 @@ namespace Platformer
                 dashCooldownTimer.Start();
             };
 
+        }
+        
+        private void JumpingOrFalling()
+        {
+            if (jumpVelocity >0)
+            {
+                jumpSpeed = 1;
+            }
+
+            else if (jumpVelocity < 0)
+            {
+                jumpSpeed = -1;
+            }
+            else
+            {
+                jumpSpeed = 0;
+            }
         }
     }
 }
