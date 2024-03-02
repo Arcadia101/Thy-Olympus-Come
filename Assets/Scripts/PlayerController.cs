@@ -248,7 +248,7 @@ namespace Platformer
         {
             if (!attackTimer.IsRunning)
             {
-                dashTimer.Start();
+                attackTimer.Start();
             }
         }
         
@@ -292,6 +292,7 @@ namespace Platformer
             jumpCooldownTimer = new CountdownTimer(jumpCooldown);
             dashTimer = new CountdownTimer(dashDuration);
             dashCooldownTimer = new CountdownTimer(dashCooldown);
+            attackTimer = new CountdownTimer(attackCooldown);
             
             timers = new List<Timer>(5) {jumpTimer, jumpCooldownTimer, dashTimer, dashCooldownTimer, attackTimer};
 
@@ -305,7 +306,6 @@ namespace Platformer
                 dashCooldownTimer.Start();
             };
 
-            attackTimer = new CountdownTimer(attackCooldown);
         }
     }
 }
