@@ -8,7 +8,7 @@ namespace Platformer
         [SerializeField] private float maxEther = 100;
         [SerializeField] private FloatEventChannel playerEtherChannel;
 
-        private float currentEther;
+        [SerializeField]private float currentEther;
 
         public bool IsFull => currentEther >= maxEther;
         public bool IsEmpty => currentEther <= 0f;

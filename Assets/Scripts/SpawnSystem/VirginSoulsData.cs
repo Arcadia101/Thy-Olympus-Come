@@ -2,8 +2,8 @@
 
 namespace Platformer
 {
-    [CreateAssetMenu(fileName = "CollectibleData", menuName = "Platformer/CollectibleData")]
-    public class CollectibleData : EntityData
+    [CreateAssetMenu(fileName = "VirginSoulsData", menuName = "Platformer/VirginSoulsData")]
+    public class VirginSoulsData : EntityData
     {
         public int score;
         //additional properties specific to collectibles

@@ -6,7 +6,7 @@ namespace Platformer
 {
     public class VirginSoulSpawnManager : EntitySpawnManager
     {
-        [SerializeField] private CollectibleData[] virginSoulData;
+        [SerializeField] private VirginSoulsData[] virginSoulData;
         [SerializeField] private float spawnInterval = 1f;
 
         private EntitySpawner<VirginSoul> spawner;

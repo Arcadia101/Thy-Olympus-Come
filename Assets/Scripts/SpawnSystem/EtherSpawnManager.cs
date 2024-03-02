@@ -6,7 +6,7 @@ namespace Platformer
 {
     public class EtherSpawnManager : EntitySpawnManager
     {
-        [SerializeField] private CollectibleData[] etherData;
+        [SerializeField] private EtherData[] etherData;
         [SerializeField] private float spawnInterval = 1f;
 
         private EntitySpawner<Ether> spawner;
