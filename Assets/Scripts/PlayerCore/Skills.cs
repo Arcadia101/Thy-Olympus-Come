@@ -128,5 +128,15 @@ namespace Platformer
             animator.SetFloat(Strike,kStrike);
             animator.SetFloat(Slow, tSlow);
         }
+
+        public void Selecting()
+        {
+            Debug.Log("selecting");
+        }
+
+        public void Selected()
+        {
+            Debug.Log("selected");
+        }
     }
 }

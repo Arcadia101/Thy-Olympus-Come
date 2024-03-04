@@ -107,6 +107,7 @@ namespace Platformer
             input.Dash += OnDash;
             input.Attack += OnAttack;
             input.Skill += OnSkill;
+            input.SelectingSkill += OnSelectingSkill;
         }
 
         void OnDisable()
@@ -115,6 +116,7 @@ namespace Platformer
             input.Dash -= OnDash;
             input.Attack -= OnAttack;
             input.Skill -= OnSkill;
+            input.SelectingSkill -= OnSelectingSkill;
         }
         void Update()
         {
@@ -270,6 +272,18 @@ namespace Platformer
             }
         }
         
+        void OnSelectingSkill(bool performed)
+        {
+            if (performed)
+            {
+                playerSkills.Selecting();
+            }
+            else if (!performed)
+            {
+                playerSkills.Selected();
+            }
+        }
+        
         private void SetupStateMachine()
         {
             //StateMachine
@@ -280,6 +294,7 @@ namespace Platformer
             var jumpState = new JumpState(this, animator);
             var dashState = new DashState(this, animator);
             var attackState = new AttackState(this, animator);
+            var skillState = new SkillState(this, animator);
             
             //Define transitions
             At(locomotionState, jumpState, new FuncPredicate(() => jumpTimer.IsRunning));
@@ -288,6 +303,8 @@ namespace Platformer
             At(locomotionState, jumpState, new FuncPredicate(() => !groundChecker.IsGrounded));
             At(locomotionState, attackState, new FuncPredicate(() => attackTimer.IsRunning));
             At(attackState, locomotionState, new FuncPredicate(() => !attackTimer.IsRunning));
+            At(locomotionState, skillState, new FuncPredicate(() => skillTimer.IsRunning));
+            At(skillState, locomotionState, new FuncPredicate(() => !skillTimer.IsRunning));
             Any(dashState, new FuncPredicate(() => dashTimer.IsRunning));
             Any(locomotionState, new FuncPredicate(ReturnToLocomotionState));
             
@@ -300,7 +317,8 @@ namespace Platformer
             return groundChecker.IsGrounded 
                    && !attackTimer.IsRunning 
                    && !jumpTimer.IsRunning 
-                   && !dashTimer.IsRunning;
+                   && !dashTimer.IsRunning
+                   && !skillTimer.IsRunning;
         }
 
         private void SetupTimers()
